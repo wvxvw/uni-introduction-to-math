@@ -1,0 +1,628 @@
+% Created 2014-10-17 Fri 17:30
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage[utf8]{inputenc}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[backend=bibtex, style=numeric]{biblatex}
+\usepackage{commath}
+\usepackage{tikz}
+\usetikzlibrary{shapes,backgrounds}
+\usepackage{marginnote}
+\usepackage{minted}
+\usemintedstyle{perldoc}
+\hypersetup{urlcolor=blue}
+\hypersetup{colorlinks,urlcolor=blue}
+\addbibresource{bibliography.bib}
+\setlength{\parskip}{16pt plus 2pt minus 2pt}
+\definecolor{codebg}{rgb}{0.96,0.99,0.8}
+\author{Oleg Sivokon}
+\date{2014-10-16}
+\title{Assignment 11, Introduction To Mathematics}
+\hypersetup{
+  pdfkeywords={Introduction To Mathematics, Assignment, Set Theory},
+  pdfsubject={First asssignment in the course Introduction To Mathematics},
+  pdfcreator={Emacs 24.3.50.1 (Org mode 8.2.2)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\clearpage
+
+\section{Problems}
+\label{sec-1}
+
+\subsection{Problem 1}
+\label{sec-1-1}
+
+Let $A$ and $B$ be defined as follows:
+
+\begin{equation}
+\begin{split}
+& A = \{1, 4, 9, ...\} = \{n^2 | n \in \mathbb{N}\} \\
+& B = \{1, 16, 81, ...\} = \{n^4 | n \in \mathbb{N}\}
+\end{split}
+\end{equation}
+
+\begin{enumerate}
+\item Find a bijection from $A$ to $B$.
+\item Find a non-bijective binary relation $A R B$.
+\item What can you conclude about equivalence between $A$ and $B$,
+based on questions 1 and 2?
+\item Do previous questions imply that $A$ is infinite?
+\end{enumerate}
+
+\subsubsection{Answer 1}
+\label{sec-1-1-1}
+There must be many ways to find a bijection between $A$ and $B$,
+but I will proceed by finding $f:A \rightarrow \mathbb{N}$ and
+$g:B \rightarrow \mathbb{N}$.  Provided I can find these, than it
+must be the case that I found a bijection from $A$ to $B$.
+
+I will define $f$ and $g$ as follows:
+
+\begin{equation}
+\begin{split}
+& f(x) = \norm{\sqrt[2]{x}} \\
+& g(x) = \norm{\sqrt[4]{x}}
+\end{split}
+\end{equation}
+
+Clearly, it is the case that
+$\forall x, y \in A. x \neq y \implies f(x) \neq f(y)$, similarly
+$\forall x, y \in B. x \neq y \implies f(x) \neq f(y)$.  In addition,
+we are guranteed that $f(A) \in \mathbb{N}$ and $g(B) \in \mathbb{N}$
+by construction.  Dissimilarity of this kind is the defining property of
+bijection.
+
+Since $f(A)$ is equivalent to $\mathbb{N}$ and $g(B)$ is equivalent to
+$\mathbb{N}$, it follows that they are equivalent under $f \circ g$.
+Not only that, we had actually proved a stronger claim that
+$f(A) = g(B) = \mathbb{N}$.
+\subsubsection{Answer 2}
+\label{sec-1-1-2}
+One non-bijective relation $R$ on $A$ and $B$ can be defined as follows:
+
+\begin{equation}
+R(A, B) = \{(a, b) | b \in A \land b \in B \land a = b \}
+\end{equation}
+
+In other words, this relation will only select such elements of $A$, which
+are also present in $B$.  Since $4 \not \in B$, there is no element matched
+to it in $R$.  Consequently, $R$ is not a bijection.
+\subsubsection{Answer 3}
+\label{sec-1-1-3}
+There are many different equivalence relations that can be established
+between $A$ and $B$, an example different from the one used in \ref{sec-1-1-1}
+could be:
+\begin{equation}
+\{(a, b) | a \in A \land b \in B \land
+((a \bmod 2 = 1 \land (a - 1)^2 = b) \lor (a + 1)^2 = b)\}
+\end{equation}
+
+Such equivalence relation would select all odd members of $A$ and send them
+to the member of $B$ such as it would be the square of it plus one.  It
+would do the reverse for even numbers (effectively swapping between the
+two).  Yet, all of these equivalence relations would have to be within the
+$\aleph_0$ equivalence class.
+\subsubsection{Answer 4}
+\label{sec-1-1-4}
+$A$ and $B$ are infinite if only for the reason that they are equivalent to
+$\mathbb{N}$, which is known to be infinite, but this can be seen without
+reliance on equivalence relation simply by observing that we can always
+construct a member of $A$ or $B$ larger than any of the members constructed
+so far.
+\subsection{Problem 2}
+\label{sec-1-2}
+The Venn diagram below describes the relation between sets $A, B, C$ and $E$.
+Paint the areas according to the expressions given below.
+
+\begin{enumerate}
+\item $B \setminus (A \setminus C)$
+\item $B \setminus (C \setminus A)$
+\item $((A \setminus B) \setminus C) \cup (A \cap B^c(E) \cup C^c(E))$
+\item $(A \cup B)^c(E) \cup (B \cup C)^c(E) \cup (C \cup A)^c(E)$
+\item $(A \cup B) \cap (B \cup C) \cap (C \cup A)$
+\end{enumerate}
+
+\def\firstcircle{(2,2.8) circle (1.2cm)}
+\def\secondcircle{(4,2.8) circle (1.2cm)}
+\def\thirdcircle{(3,1.4) circle (1.2cm)}
+\def\background{(0,0) rectangle (6,4.2cm)}
+
+\begin{tikzpicture}
+  \draw \background node [above] {$E$};
+  \draw \firstcircle node {$A$};
+  \draw \secondcircle node {$B$};
+  \draw \thirdcircle node {$C$};
+\end{tikzpicture}
+
+\subsubsection{Answer 5}
+\label{sec-1-2-1}
+$B \setminus (A \setminus C)$
+
+\begin{tikzpicture}
+  \begin{scope}[shift={(6cm,0cm)}]
+    \begin{scope}
+      \clip \thirdcircle;
+      \clip \firstcircle;
+      \fill[yellow] \secondcircle;
+    \end{scope}
+    \begin{scope}[even odd rule]
+      \clip \firstcircle (0,0) rectangle (6,6);
+      \fill[yellow] \secondcircle;
+    \end{scope}
+    \draw \background node [above] {$E$};
+    \draw \firstcircle node {$A$};
+    \draw \secondcircle node {$B$};
+    \draw \thirdcircle node {$C$};
+  \end{scope}
+\end{tikzpicture}
+\subsubsection{Answer 6}
+\label{sec-1-2-2}
+$B \setminus (C \setminus A)$
+
+\begin{tikzpicture}
+  \begin{scope}[shift={(6cm,0cm)}]
+    \begin{scope}
+      \clip \thirdcircle;
+      \clip \firstcircle;
+      \fill[yellow] \secondcircle;
+    \end{scope}
+    \begin{scope}[even odd rule]
+      \clip \thirdcircle (0,0) rectangle (6,6);
+      \fill[yellow] \secondcircle;
+    \end{scope}
+    \draw \background node [above] {$E$};
+    \draw \firstcircle node {$A$};
+    \draw \secondcircle node {$B$};
+    \draw \thirdcircle node {$C$};
+  \end{scope}
+\end{tikzpicture}
+\subsubsection{Answer 7}
+\label{sec-1-2-3}
+$((A \setminus B) \setminus C) \cup (A \cap B^c(E) \cup C^c(E))$
+
+\begin{tikzpicture}
+  \begin{scope}[shift={(6cm,0cm)}]
+    \begin{scope}
+      \clip \thirdcircle (0,0) rectangle (6,6);
+      \clip \secondcircle (0,0) rectangle (6,6);
+      \fill[yellow] \firstcircle;
+    \end{scope}
+    \begin{scope}[even odd rule]
+      \clip \thirdcircle (0,0) rectangle (6,6);
+      \fill[yellow] \firstcircle;
+    \end{scope}
+    \begin{scope}[even odd rule]
+      \clip \secondcircle (0,0) rectangle (6,6);
+      \fill[yellow] \firstcircle;
+    \end{scope}
+    \draw \background node [above] {$E$};
+    \draw \firstcircle node {$A$};
+    \draw \secondcircle node {$B$};
+    \draw \thirdcircle node {$C$};
+  \end{scope}
+\end{tikzpicture}
+\subsubsection{Answer 8}
+\label{sec-1-2-4}
+$(A \cup B)^c(E) \cup (B \cup C)^c(E) \cup (C \cup A)^c(E)$
+
+\begin{tikzpicture}
+  \begin{scope}[shift={(6cm,0cm)}]
+    \begin{scope}
+      \clip \firstcircle (0,0) rectangle (6,6);
+      \clip \secondcircle (0,0) rectangle (6,6);
+      \clip \thirdcircle (0,0) rectangle (6,6);
+      \fill[yellow] \background;
+    \end{scope}
+    \begin{scope}
+      \clip \secondcircle (0,0) rectangle (6,6);
+      \fill[yellow] \firstcircle;
+    \end{scope}
+    \begin{scope}
+      \clip \thirdcircle (0,0) rectangle (6,6);
+      \fill[yellow] \secondcircle;
+    \end{scope}
+    \begin{scope}
+      \clip \firstcircle (0,0) rectangle (6,6);
+      \fill[yellow] \thirdcircle;
+    \end{scope}
+    \draw \background node [above] {$E$};
+    \draw \firstcircle node {$A$};
+    \draw \secondcircle node {$B$};
+    \draw \thirdcircle node {$C$};
+  \end{scope}
+\end{tikzpicture}
+\subsubsection{Answer 8}
+\label{sec-1-2-5}
+$(A \cup B) \cap (B \cup C) \cap (C \cup A)$
+
+\begin{tikzpicture}
+  \begin{scope}[shift={(6cm,0cm)}]
+    \begin{scope}
+      \clip \secondcircle;
+      \fill[yellow] \firstcircle;
+    \end{scope}
+    \begin{scope}
+      \clip \thirdcircle;
+      \fill[yellow] \secondcircle;
+    \end{scope}
+    \begin{scope}
+      \clip \firstcircle;
+      \fill[yellow] \thirdcircle;
+    \end{scope}
+    \draw \background node [above] {$E$};
+    \draw \firstcircle node {$A$};
+    \draw \secondcircle node {$B$};
+    \draw \thirdcircle node {$C$};
+  \end{scope}
+\end{tikzpicture}
+\subsection{Problem 3}
+\label{sec-1-3}
+Given sets $A$ and $B$, such that $\forall x \in B. A \setminus \{x\} \equiv A$,
+prove or disprove:
+
+\begin{enumerate}
+\item If $A$ is finite, then $A \cap B = \emptyset$.
+\item If $B$ is finite, then $A \cap B = \emptyset$.
+\end{enumerate}
+
+\subsubsection{Answer 9}
+\label{sec-1-3-1}
+If $A$ is finite, then $A \cap B = \emptyset$ holds, because if it wasn't the
+case, then there had to be $x \in B$ such that it would be both a member of $A$
+and of $B$.  If we then pair up every element of $A$ to $A \setminus \{x\}$ using,
+identity relation (which is known to be bijective), that particular $x$ would had
+no pair.  The later would contradict the initial assumption
+$A \equiv A \setminus \{x\}$.
+\subsubsection{Answer 10}
+\label{sec-1-3-2}
+If $B$ is finite, the statement $A \cap B = \emptyset$ doesn't always hold.
+One such example can be given by assignment:
+
+\begin{equation}
+\begin{split}
+& A = \mathbb{N} \\
+& B = \{1\} \\
+& R(A, A \setminus B) = \{(x, x + 1) | x \in A\}
+\end{split}
+\end{equation}
+
+Where $R$ is a binary bijective relation on $A$ and $A \setminus B$.
+\subsection{Problem 4}
+\label{sec-1-4}
+Given sets $A$ and $B$ prove or disprove:
+
+\begin{enumerate}
+\item $(A = A \setminus B) \implies (B = \emptyset)$.
+\item $(A = A \setminus B) \implies (A \cap B = \emptyset)$.
+\item $(A \equiv A \setminus B) \implies (A \cap B = \emptyset)$.
+\item $(Finite(A) \land (A \equiv A \setminus B)) \implies (A \cap B = \emptyset)$.
+\end{enumerate}
+
+\subsubsection{Answer 11}
+\label{sec-1-4-1}
+$(A = A \setminus B) \implies (B = \emptyset)$ doesn't hold because it is
+possible for all elements of $B$, however many, not to be elements of $A$.
+To illustrate the contradiction we construct this example:
+
+\begin{equation}
+\begin{split}
+& A = \{1\} \\
+& B = \{2\} \\
+& A \setminus B = \{1\} = A
+\end{split}
+\end{equation}
+\subsubsection{Answer 12}
+\label{sec-1-4-2}
+$(A = A \setminus B) \implies (A \cap B = \emptyset)$ holds, because if
+it wasn't the case, then there had to be such $b \in B$, which is also the
+member of $A$.  Subtracting $b$ from $A$ would thus had created a set
+distinct from $A$, but we are given $A = A \setminus \{b\}$.  Hence, this
+is impossible.  Hence, the original claim holds.
+\subsubsection{Answer 13}
+\label{sec-1-4-3}
+This is the exact replica of the question \ref{sec-1-3-2}. The statement 
+$(A \equiv A \setminus B) \implies (A \cap B = \emptyset)$ doesn't hold for
+infinite $A$.
+\subsubsection{Answer 14}
+\label{sec-1-4-4}
+As this is a refinement of question \ref{sec-1-4-3}, and as I mentioned earlier,
+This statement is indeed true.  Finite sets can only be equivalent if they
+are also equal.  Subracting an element from a finite set creates a distinct
+set.  Thus it must be the case that we did not subtract any elements from
+$A$, but that would be only possible if $A \cap B = \emptyset$.
+\section{Exercises}
+\label{sec-2}
+Given $A$, $B$ and $C$ are sets, $\emptyset$ is the empty set and $\mathbb{N}$
+is the set of natural numbers, $Finite(X)$ and $Infinite(X)$ are predicates
+which are true if $X$ is finite or infinite, $R$ is a binary relation and
+$Bijection(X)$ is true when relation $X$ is a bijection, answer:
+
+\begin{itemize}
+\item \textbf{a} if only the first statement is correct.
+\item \textbf{b} if only the second statement is correct.
+\item \textbf{c} if both statements are correct.
+\item \textbf{d} if neither statement is correct.
+\end{itemize}
+
+\subsection{Exercise 1}
+\label{sec-2-1}
+\begin{equation}
+\begin{split}
+& 1.\; \{1, 2\} \subseteq \{1, \{1, 2\}\} \\
+& 2.\; \{1, 2\} \in \{1, \{1, 2\}\}
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 2}
+\label{sec-2-2}
+\begin{equation}
+\begin{split}
+& 1.\; \{1\} \subseteq \{1, \{1, 2\}\} \\
+& 2.\; \{1\} \in \{1, \{1, 2\}\}
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{a}
+\subsection{Exercise 3}
+\label{sec-2-3}
+\begin{equation}
+\begin{split}
+& 1.\; \emptyset \subseteq \{1, 2\} \\
+& 2.\; \emptyset \in \{1, 2\}
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{a}
+\subsection{Exercise 4}
+\label{sec-2-4}
+\begin{equation}
+\begin{split}
+& 1.\; (A \subset B) \implies (A \subseteq B) \\
+& 2.\; (A \subset B) \implies B \neq \emptyset
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{c}
+\subsection{Exercise 5}
+\label{sec-2-5}
+\begin{equation}
+\begin{split}
+& 1.\; (x \not \in A) \implies (x \not \in (A \cap B)) \\
+& 2.\; (x \not \in A) \implies (x \not \in (A \cup B))
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 6}
+\label{sec-2-6}
+\begin{equation}
+\begin{split}
+& 1.\; (x \not \in (A \cup B)) \implies ((x \not \in A) \land (x \not \in B)) \\
+& 2.\; (x \not \in (A \cap B)) \implies ((x \not \in A) \land (x \not \in B))
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{a}
+\subsection{Exercise 7}
+\label{sec-2-7}
+\begin{equation}
+\begin{split}
+& 1.\; (x \in (A \setminus B)) \implies (x \not \in B) \\
+& 2.\; (x \not \in (A \setminus B)) \implies ((x \not \in A) \lor (x \in B))
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{c}
+\subsection{Exercise 8}
+\label{sec-2-8}
+\begin{equation}
+\begin{split}
+& 1.\; (A \not \subseteq B) \implies (A \cap B = \emptyset) \\
+& 2.\; (A \subseteq B) \implies (A \cap B \neq \emptyset)
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 9}
+\label{sec-2-9}
+\begin{equation}
+\begin{split}
+& 1.\; (A \not \subseteq B) \implies (A \cap B = \emptyset) \\
+& 2.\; (A \subseteq B) \implies (A \cap B \neq \emptyset)
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 10}
+\label{sec-2-10}
+
+\begin{tikzpicture}
+  \begin{scope}[shift={(6cm,0cm)}]
+    \begin{scope}
+      \clip \thirdcircle;
+      \fill[yellow] \secondcircle;
+    \end{scope}
+    \begin{scope}[even odd rule]
+      \clip \thirdcircle (0,0) rectangle (6,6);
+      \fill[yellow] \firstcircle;
+    \end{scope}
+    \draw \background node [above] {$E$};
+    \draw \firstcircle node {$A$};
+    \draw \secondcircle node {$B$};
+    \draw \thirdcircle node {$C$};
+  \end{scope}
+\end{tikzpicture}
+
+The area painted in the diagram is accurately described by:
+
+\begin{equation}
+\begin{split}
+& 1.\; ((A \cup B) \cap C) \cup (A \setminus B) \\
+& 2.\; ((A \cup C) \setminus (B \setminus C)) \setminus ((C \setminus B) \setminus A)
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{d}
+
+\subsection{Exercise 11}
+\label{sec-2-11}
+\begin{equation}
+\begin{split}
+& 1.\; (A \neq B) \implies ((A \not \subseteq B) \land (B \not \subseteq A)) \\
+& 2.\; (B = B \cup A) \implies (A = A \cap B)
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 12}
+\label{sec-2-12}
+\begin{equation}
+\begin{split}
+& 1.\; \{1, 2\} \subseteq \{\mathbb{N}\} \\
+& 2.\; \{1\} \subseteq \{\mathbb{N}\}
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{d}
+\subsection{Exercise 13}
+\label{sec-2-13}
+\begin{equation}
+\begin{split}
+& 1.\; \exists A. A \equiv \{A\} \\
+& 2.\; (B \in A) \implies (B \not \equiv A)
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{a}
+\subsection{Exercise 14}
+\label{sec-2-14}
+\begin{equation}
+\begin{split}
+& 1.\; Infinite(A) \implies (\forall B. ((B \subset A) \implies (A \equiv B))) \\
+& 2.\; Infinite(A) \implies (\exists B. ((B \subseteq A) \implies (A \not \equiv B)))
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 15}
+\label{sec-2-15}
+\begin{equation}
+\begin{split}
+& 1.\; Infinite(B) \implies (\forall B. ((B \in A) \implies Infinite(A))) \\
+& 2.\; Finite(A) \implies (\forall B. ((B \subset A) \implies (B \not \equiv A)))
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 16}
+\label{sec-2-16}
+\begin{equation}
+\begin{split}
+& 1.\; (B \equiv A) \implies (\forall R. Bijection(R(A, B))) \\
+& 2.\; ((A \subset B) \land (A \not \equiv B)) \implies Infinite(B)
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{d}
+\subsection{Exercise 17}
+\label{sec-2-17}
+\begin{equation}
+\begin{split}
+& 1.\; (((A \cup B) \equiv A) \land (B \subset A)) \implies Infinite(A \cup B) \\
+& 2.\; ((A \cap B) \equiv A) \implies Infinite(A)
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{d}
+\subsection{Exercise 18}
+\label{sec-2-18}
+\begin{equation}
+\begin{split}
+& 1.\; Infinite(\{1, \mathbb{N}\}) \\
+& 2.\; Infinite(P(\mathbb{N}) \setminus \mathbb{N})
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 19}
+\label{sec-2-19}
+\begin{equation}
+\begin{split}
+& 1.\; \forall A. (P(A) \neq \emptyset) \\
+& 2.\; \forall x. ((x \in A) \implies (x \in P(A)))
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{d}
+\subsection{Exercise 20}
+\label{sec-2-20}
+\begin{equation}
+\begin{split}
+& 1.\; ((B \in P(A)) \land (C \subseteq B)) \implies (C \in P(A)) \\
+& 2.\; (B \in P(A)) \implies (B \not \in A)
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{a}
+\subsection{Exercise 21}
+\label{sec-2-21}
+\begin{equation}
+\begin{split}
+& 1.\; Infinite(A) \implies (A \equiv \mathbb{N}) \\
+& 2.\; Infinite(A) \implies (\forall B. ((Infinite(B) \land (B \subseteq A)) \implies (A \equiv B)))
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{d}
+\subsection{Exercise 22}
+\label{sec-2-22}
+\begin{equation}
+\begin{split}
+& 1.\; (B \equiv P(A)) \implies (A \not \equiv B) \\
+& 2.\; Infinite(A) \implies (P(A) \equiv P(P(A)))
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{a}
+\subsection{Exercise 23}
+\label{sec-2-23}
+\begin{equation}
+\begin{split}
+& 1.\; (C \subset A) \implies (\exists B. ((B \subseteq A) \land (B \not \equiv A))) \\
+& 2.\; \forall A. \exists C. ((A \in C) \land (C \not \equiv A))
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{c}
+\subsection{Exercise 24}
+\label{sec-2-24}
+\begin{equation}
+\begin{split}
+& 1.\; \Box (R(\mathbb{N}, \mathbb{N} \cup \{0\}) \land (\forall x \in \mathbb{N}. (x, x - 1) \in R)) \\
+& 2.\; \mathbb{N} \cup \{\mathbb{N}\} \equiv P(\mathbb{N})
+\end{split}
+\end{equation}
+
+\emph{Answer:} \textbf{d}
+% Emacs 24.3.50.1 (Org mode 8.2.2)
+\end{document}
