@@ -1,0 +1,533 @@
+% Created 2014-11-15 Sat 15:08
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage[utf8]{inputenc}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[backend=bibtex, style=numeric]{biblatex}
+\usepackage{commath}
+\usepackage{tikz}
+\usetikzlibrary{shapes,backgrounds}
+\usepackage{marginnote}
+\usepackage{minted}
+\usepackage{enumerate}
+\usemintedstyle{perldoc}
+\hypersetup{urlcolor=blue}
+\hypersetup{colorlinks,urlcolor=blue}
+\addbibresource{bibliography.bib}
+\setlength{\parskip}{16pt plus 2pt minus 2pt}
+\definecolor{codebg}{rgb}{0.96,0.99,0.8}
+\author{Oleg Sivokon}
+\date{\textit{<2014-10-24 Fri>}}
+\title{Assignment 12, Introduction To Mathematics}
+\hypersetup{
+  pdfkeywords={Introduction To Mathematics, Assignment, Set Theory},
+  pdfsubject={Second asssignment in the course Introduction To Mathematics},
+  pdfcreator={Emacs 25.0.50.1 (Org mode 8.2.2)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\clearpage
+
+\section{Problems}
+\label{sec-1}
+
+\subsection{Problem 1}
+\label{sec-1-1}
+
+\begin{enumerate}
+\item Given $A = \{1, \{1\}\}$ and $B = \{1, \emptyset\}$ write down:
+
+$P(A)$, $P(B)$, $P(A) \setminus B(B)$, $P(B) \setminus B$, $P(A) \setminus \{A\}$.
+\item Given set $C$, prove or disprove:
+\begin{enumerate}[(i)]
+\item $P(C) \cap C = \emptyset$
+\item $P(C) \cap C \neq \emptyset$
+\end{enumerate}
+\end{enumerate}
+
+\subsubsection{Answer 1}
+\label{sec-1-1-1}
+
+\begin{equation}
+\begin{split}
+& P(A) = \{\emptyset, \{1\}, \{\{1\}\}, \{1, \{1\}\}\} \\
+& P(B) = \{\emptyset, \{1\}, \{\emptyset\}, \{1, \emptyset\}\} \\
+& P(A) \setminus B(B) = \{\{\{1\}\}, \{1, \{1\}\}\} \\
+& P(A) \setminus \{A\} = \{\emptyset,  \{\{1\}\}, \{1, \{1\}\} \}
+\end{split}
+\end{equation}
+\subsubsection{Answer 2}
+\label{sec-1-1-2}
+(i) is clearly false if only because constructing a powerset would had to be
+an identity operation.  Since a single example suffices to disprove a claim,
+I will proceed by constructing an example:
+
+Assume $C = \{\emptyset\}$, then:
+
+\begin{equation}
+\begin{split}
+& P(C) = \{\emptyset, \{\emptyset\}\} \\
+& P(C) \cap C = \{\emptyset\}
+\end{split}
+\end{equation}
+
+We assumed $P(C) \cap C$ to be $\emptyset$, but discovered it to be
+$\{\emptyset\}$, which is a contradiction.  Therefore the inital claim is
+false.
+\subsubsection{Answer 3}
+\label{sec-1-1-3}
+(ii) is flase, we can certainly have sets where intersection of that set with
+the set of its subsets will produce no results.  In fact any set that contains
+no other sets will produce an empty result under intersection.  For example:
+
+Assume $C = \{1\}$, then:
+
+\begin{equation}
+\begin{split}
+& P(C) = \{\emptyset, \{1\}\} \\
+& P(C) \cap C = \emptyset
+\end{split}
+\end{equation}
+
+We assumed $P(C) \cap C \neq \emptyset$, but discovered that it is also
+possible that $P(C) \cap C = \emptyset$, which is a contradiction.
+Therefore the initial claim is false.
+
+\subsection{Problem 2}
+\label{sec-1-2}
+Given sets $A$, $B$, and $C$ prove that:
+
+\begin{enumerate}
+\item $(A \cup B) \setminus C = (A \setminus C) \cup (B \setminus C)$.
+\item $A \setminus (B \setminus C) \subseteq (A \setminus B) \setminus C \implies A \cap C = \emptyset$.
+\end{enumerate}
+
+Prove or disprove:
+
+\begin{enumerate}
+\item $P(A) \subseteq B \implies \{\emptyset, A\} \in P(B)$.
+\item $\{\emptyset, A\} \in P(B) \implies P(A) \subseteq B$.
+\end{enumerate}
+
+\subsubsection{Answer 4}
+\label{sec-1-2-1}
+I will prove this using a method similar to proving the distributivity property of
+union over intersection.
+
+To prove by contradiction, we need to examine two cases:
+
+\begin{enumerate}
+\item There is $x \in (A \cup B) \setminus C$ such that 
+       $x \not \in ((A \setminus C) \cup (B \setminus C))$.
+\item There is $x \in ((A \setminus C) \cup (B \setminus C))$ such that
+       $x \not \in (A \cup B) \setminus C$.
+\end{enumerate}
+
+(1) For $x$ to be member of a difference of sets would mean it has to be the
+member of minuend (by definition of subtraction).  We find that minuend is
+the union of sets, which means that, by definition of union, $x$ could come
+from either one of the unioned sets.  So, for $x$ not to be in the left-hand side
+of the formula it would mean that it must be the case that it is either not in
+the union of $A$ and $B$, or that it is in $C$.  Neither of which is true, which
+is easy to become convinced of by observing the two parts of the right-hand side
+of the formula: if $x \not \in (A \setminus C)$ then it absolutely has to be in
+$B$ and not in $C$, which is exactly what the rest of the formula negates.
+Thus we arrive at contradiction.  It must be the case that whenever
+$x \in (A \cup B) \setminus C$ it is also the case that
+$x \in ((A \setminus C) \cup (B \setminus C))$.
+
+(2) By symmetrical argument we show that if
+$x \in ((A \setminus C) \cup (B \setminus C))$ then it is the case that
+$x \in (A \cup B) \setminus C$.
+
+Having proved both cases we now conclude that union is distributive over
+subtraction.
+\subsubsection{Answer 5}
+\label{sec-1-2-2}
+To prove the claim, I'm going to show that there is no such $x$, for which
+both:
+$x \in (A \setminus (B \setminus C) \subseteq (A \setminus B) \setminus C)$
+and $x \in (A \cap C)$ is true at the same time.  Proving this is equivalent
+to proving the initial claim because if this was the case, then $A \cap C$
+would not be an empty set (it would had to contain $x$), or
+$A \setminus (B \setminus C) \subseteq (A \setminus B) \setminus C$ would be
+false (these are the only two cases how a material implication can fail, from
+definition of material implication).
+
+For $x$ to be a member of $A \cap C$ means that it is both in $A$ and in $C$
+(by definition of intersection).  This can only happen when we \emph{don't}
+subtract $C$ from the result (otherwise the $A \cap C$ would be an empty set).
+This only happens in $A \setminus (B \setminus C)$.  This means that if the
+initial claim was true, there had to be such elements in
+$A \setminus (B \setminus C)$, which are not in $(A \setminus B) \setminus C$,
+but this contradicts the definition of set inclusion.  Since we arrived at
+contradiction in our initial claim, which we set to disprove, we arrived at
+the proof.
+\subsubsection{Answer 6}
+\label{sec-1-2-3}
+Both $A$ and $\emptyset$ are certainly the members of $P(A)$, so if $B$
+contains at least all the elements of $P(A)$, it certainly contains both the
+$A$ and the $\emptyset$.  Then, of course, $P(B)$ must contain a set
+containing two elements of $P(A)$, $\{A, \emptyset\}}$ among them.
+\subsubsection{Answer 7}
+\label{sec-1-2-4}
+This is a false claim, here's an assignment that holds for antecedent, but
+doesn't for consequent:
+
+\begin{equation}
+\begin{split}
+& A = \{a, b\} \\
+& P(A) = \{\emptyset, \{a\}, \{b\}, \{a, b\}\} \\
+& B = \{\emptyset, \{a, b\}\} \\
+& P(B) = \{\emptyset, \{\emptyset\}, \{\{a, b\}\}, \{\emptyset, \{a, b\}\}\} \\
+& \{A, \emptyset\} \in P(B) = \{\emptyset, \{a, b\}\} \in P(B) =
+\{\emptyset, \{a, b\}\} \in \{\emptyset, \{\emptyset\}, \{\{a, b\}\},
+\{\emptyset, \{a, b\}\}\} \\
+& P(A) \not \subseteq B = \{\emptyset, \{a\}, \{b\}, \{a, b\}\} \not \subseteq
+\{\emptyset, \{a, b\}\}
+\end{split}
+\end{equation}
+
+I.e. it is possible to construct such set $B$ that its powerset would satisfy
+the left-hand side of the formula, but fail the right-hand side.
+
+\subsection{Problem 3}
+\label{sec-1-3}
+\begin{enumerate}
+\item Given a binary operation * on even numbers $A = \{2x | x \in \mathbb{N}\}$, for
+all $x, y \in A$ the following holds:
+
+\begin{equation}
+x * y = \frac{(x - 2)(y - 2)}{2} + 2
+\end{equation}
+
+Verify whether $A$ is closed under *, that * is associative, that there exists
+an identity element and that every element has its inverse under this operation.
+\item Assume now that $A$ is defined as $A = \{2x | x \in \mathbb{Q}\}$, give the 
+characteristics of properties outlined in (1).
+\end{enumerate}
+
+\subsubsection{Answer 8}
+\label{sec-1-3-1}
+In order to show that $A$ is closed under *, observe that adding 2 to any
+even number will not make it odd.  We can thus disregard the addition.
+Next, observe that in order for division by 2 to produce an even number the
+divident must be divisible by 4.  Our dividen is a product of two numbers.
+If we can show that both of them are even (that is each of them has a factor
+of two), then their product must be a multiple of 4.  This problem is thus
+equivalent to showing that even numbers are closed under subtraction of 2.
+Given our definition of $A$, it is possible to produce 0 as the result of
+the $(x - 2)(y - 2)/2$, if either $x$ or $y$ are equal to 2, however, the +2
+part saves us from ever obtaining a final result less then 2.  Thus, I
+conclude that $A$ is closed under *.
+
+To prove $(x * y) * z = x * (y * z)$ observe that the problem scales down to
+proving associativity of multiplication (since other function terms have no effect
+on associativity property).  I.e. we actually need to prove
+$((x - 2)(y - 2))(z - 2) = (x - 2)((y - 2)(z - 2))$ which is true, so long
+multiplication on natural numbers is associative.
+
+The definition of identity element is $ix = x$. And there is such element,
+namely 4.  Since the function behaves similarly to multiplication, I looked
+for the transformation I'd had to perform on the multiplication identity
+element in order to find one here.  But, I wouldn't know of a proof of it
+being the identity element.
+
+Not all elements have their inverses in $A$. Inverse is defined to be $x * y = i$,
+where $i$ is the identity element, whose existence we just established.  But
+and since this function behaves equivalently to multiplication, we can assume
+that its values only increase, therefore 6 * 2 = 2, 6 * 4 = 6, 6 * 6 = 10, \ldots{}
+I.e. there would be no inverse for 6.  Another way to think about the problem
+is to notice that 4, the identity element has no odd factors, but some even
+numbers do have such factors.  By using only multiplication and no rationals less
+then 1, we cannot possibly arrive from a number with odd factors to a number which
+doesn't have them.
+\subsubsection{Answer 9}
+\label{sec-1-3-2}
+The closure property will hold if we substitute $\mathbb{Q}$ for $\mathbb{N}$.
+Even though we now allow negative numbers, we are no longer constrained by natural
+numbers range.  Using this function we never create irrational numbers, because
+all its input and its terms are integers.
+
+Associativity holds just as it did before, we didn't rely on the properties of
+integers to show the associativity the first time.
+
+Consequently, the identity elements remains the same element.
+
+However, now we have a chance of finding inverses for all elements!
+
+It looks like the function:
+\begin{equation}
+x *' y = \frac{1}{2} - \frac{2}{(x + 2)(y + 2)}
+\end{equation}
+Will inverse the effect of the original definition, but it doesn't, becuase when
+either $x = -2$ or $y = -2$ it results in division by zero.
+\section{Exercises}
+\label{sec-2}
+Given $A = \{a\}$, and a binary operation defined on it such that $a * a = a$.
+$B = \{a, b\}$ and binary operation + defined on $B$ as follows:
+
+\begin{center}
+\begin{tabular}{lll}
++ & a & b\\
+\hline
+a & a & b\\
+b & b & b\\
+\end{tabular}
+\end{center}
+
+$C = \{a, b, c\}$  and binary operation \% defined on $C$ as follows:
+
+\begin{center}
+\begin{tabular}{llll}
+\% & a & b & c\\
+\hline
+a & a & b & c\\
+b & b & a & c\\
+c & c & a & a\\
+\end{tabular}
+\end{center}
+
+$D$ is a non-empty set, $n, m \in \mathbb{N}$, $exp$ is the exponentiation function
+defined on $\mathbb{N}$. $f$ defined as follows:
+
+\begin{equation}
+f(x, y) = xy \bmod 10
+\end{equation}
+
+$G$ is a group, with $\circ$ being its group operation, $e$ being its identity
+element, having $a$, $b$ and $c$ as it members (it is also possible that $G$
+has other members), $Commutative(S, O)$ predicate meaning that set $S$, its argument,
+is commutative under operation $O$.
+
+Answer the following questions using:
+
+\begin{itemize}
+\item \textbf{a} if only the first statement is correct.
+\item \textbf{b} if only the second statement is correct.
+\item \textbf{c} if both statements are correct.
+\item \textbf{d} if neither statement is correct.
+\end{itemize}
+
+\subsection{Exercise 1}
+\label{sec-2-1}
+\begin{enumerate}
+\item $A$ is closed under *.
+\item * is not associative becuase $A$ has less then three members.
+\end{enumerate}
+
+\emph{Answer:} \textbf{a}
+\subsection{Exercise 2}
+\label{sec-2-2}
+\begin{enumerate}
+\item $a$ is the identity element of $A$ under *.
+\item $A$ is a group under *.
+\end{enumerate}
+
+\emph{Answer:} \textbf{c}
+\subsection{Exercise 3}
+\label{sec-2-3}
+\begin{enumerate}
+\item $B$ is closed under +.
+\item + is associative.
+\end{enumerate}
+
+\emph{Answer:} \textbf{c}
+\subsection{Exercise 4}
+\label{sec-2-4}
+\begin{enumerate}
+\item $b$ is the identity element in $B$.
+\item $B$ is a group under +.
+\end{enumerate}
+
+\emph{Answer:} \textbf{d}
+\subsection{Exercise 5}
+\label{sec-2-5}
+\begin{enumerate}
+\item \% is associative.
+\item There is identity element in $C$ under \%.
+\end{enumerate}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 6}
+\label{sec-2-6}
+\begin{enumerate}
+\item $b$ is the inverse of $c$ under \%.
+\item $c$ is the inverse of $c$ under \%.
+\end{enumerate}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 7}
+\label{sec-2-7}
+\begin{enumerate}
+\item \% is commutative.
+\item Every member of $A$ has an inverse under \%.
+\end{enumerate}
+
+\emph{Answer:} \textbf{c}
+\subsection{Exercise 8}
+\label{sec-2-8}
+\begin{enumerate}
+\item $P(D)$ is closed under $\cap$ (set intersection).
+\item $\cap$ is associative in $P(D)$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{c}
+\subsection{Exercise 9}
+\label{sec-2-9}
+\begin{enumerate}
+\item $\emptyset$ is the identity element of $P(D)$ under $\cap$.
+\item $D$ has an inverse in $P(D)$ under $\cap$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 10}
+\label{sec-2-10}
+\begin{enumerate}
+\item $P(D)$ is closed under $\setminus$ (set subtraction).
+\item $\setminus$ is associative in $P(D)$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{a}
+\subsection{Exercise 11}
+\label{sec-2-11}
+\begin{enumerate}
+\item $\emptyset$ is the identity element of $P(D)$ under $\setminus$.
+\item $\emptyset$ is the identity element of $P(D)$ under $\cup$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{c}
+\subsection{Exercise 12}
+\label{sec-2-12}
+\begin{enumerate}
+\item $exp$ is associative.
+\item $exp$ has an identity element.
+\end{enumerate}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 13}
+\label{sec-2-13}
+\begin{enumerate}
+\item $\{2, 4, 6, 8\}$ is a group under $f$.
+\item $\{1, 3, 5, 7, 9\}$ is a group under $f$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{a}
+\subsection{Exercise 14}
+\label{sec-2-14}
+\begin{enumerate}
+\item $(x \in G \land x \circ x = x) \implies (x = e)$.
+\item $(x \in G \land x \circ x = e) \implies (x = e)$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 15}
+\label{sec-2-15}
+\begin{enumerate}
+\item $(a \circ b = b \circ a) \implies Commutative(G, \circ)$.
+\item $(a = b^{-1}) \implies (b = a^{-1})$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{d}
+\subsection{Exercise 16}
+\label{sec-2-16}
+\begin{enumerate}
+\item $\forall x, y, z \in G ((x \circ y = x \circ z) \implies (y = z))$.
+\item $\forall x, y, z \in G ((x \circ y = y \circ z) \implies (x = z))$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{d}
+\subsection{Exercise 17}
+\label{sec-2-17}
+\begin{enumerate}
+\item The diagonal of the table describing $\circ$ on $G$ all members of $G$ 
+must appear.
+\item $a$ appears exactly once in every column and every row of the table 
+dscribing $\circ$ on $G$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{d}
+\subsection{Exercise 18}
+\label{sec-2-18}
+\begin{enumerate}
+\item $(a \circ b \circ c)^{-1} = a^{-1} \circ b^{-1} \circ c^{-1}$.
+\item $((a \circ b)^{-1} \neq a^{-1} \circ b^{-1}) \implies \lnot Commutative(G, \circ)$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{a}
+\subsection{Exercise 19}
+\label{sec-2-19}
+\begin{enumerate}
+\item $(a \circ b = e) \implies (b \circ a = e)$.
+\item If $G$ has exactly four members and $a \circ b = c$, then $b \circ a = c$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{d}
+\subsection{Exercise 20}
+\label{sec-2-20}
+\begin{enumerate}
+\item Any group with one, two or three members is commutative.
+\item Any group is commutative.
+\end{enumerate}
+
+\emph{Answer:} \textbf{a}
+\subsection{Exercise 21}
+\label{sec-2-21}
+Let $A$ be a group with three members.
+\begin{enumerate}
+\item There should exist a binary operation that conforms to all requirements of 
+group operation sans associativity.
+\item There exists a binary operation on $A$ which doesn't support associativity
+but has the cancellation property.
+\end{enumerate}
+
+\emph{Answer:} \textbf{b}
+\subsection{Exercise 22}
+\label{sec-2-22}
+Let $A$ be a set with defined binary operation *, which conforms to all
+group properties sans inverse element.
+\begin{enumerate}
+\item If * is commutative, then $A$ is a group under *.
+\item If * supports the cancellation property, then $A$ is a group under *.
+\end{enumerate}
+
+\emph{Answer:} \textbf{d}
+\subsection{Exercise 23}
+\label{sec-2-23}
+We define a binary operation on $\mathbb{N} \cup \{{1\over 2}\}$ thus:
+$(\forall x, y \in \mathbb{N} \cup \{{1\over 2}\}): x \Delta y = 2xy$.
+\begin{enumerate}
+\item $\Delta$ has the cancellation property.
+\item $\mathbb{N} \cup \{{1\over 2}\}$ is a group under $\Delta$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{c}
+\subsection{Exercise 24}
+\label{sec-2-24}
+Let $G$ be something defined elsewhere.
+\begin{enumerate}
+\item $(\exists x, y, z \in G): x \circ y = y \circ z$, but $x \neq z$.
+\item $(\forall x \in G): x \circ x = I \lor x \circ x \circ x = I$.
+\end{enumerate}
+
+\emph{Answer:} \textbf{not a foggiest idea}
+% Emacs 25.0.50.1 (Org mode 8.2.2)
+\end{document}

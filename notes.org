@@ -1,0 +1,63 @@
+# -*- fill-column: 80 -*-
+
+#+TITLE:     General Notes, Introduction To Mathematics
+#+AUTHOR:    Oleg Sivokon
+#+EMAIL:     olegsivokon@gmail.com
+#+DATE:      <2014-10-27 Mon>
+#+DESCRIPTION: First asssignment in the course Introduction To Mathematics
+#+KEYWORDS: Introduction To Mathematics, Assignment, Set Theory
+#+LANGUAGE: en
+#+LaTeX_CLASS: article
+#+LATEX_HEADER: \usepackage[usenames,dvipsnames]{color}
+#+LATEX_HEADER: \usepackage[backend=bibtex, style=numeric]{biblatex}
+#+LATEX_HEADER: \usepackage{commath}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usetikzlibrary{shapes,backgrounds}
+#+LATEX_HEADER: \usepackage{marginnote}
+#+LATEX_HEADER: \usepackage{minted}
+#+LaTeX_HEADER: \usemintedstyle{perldoc}
+#+LATEX_HEADER: \hypersetup{urlcolor=blue}
+#+LATEX_HEADER: \hypersetup{colorlinks,urlcolor=blue}
+#+LATEX_HEADER: \addbibresource{bibliography.bib}
+#+LATEX_HEADER: \setlength{\parskip}{16pt plus 2pt minus 2pt}
+#+LATEX_HEADER: \definecolor{codebg}{rgb}{0.96,0.99,0.8}
+
+#+BEGIN_SRC emacs-lisp :exports none
+  (setq org-latex-pdf-process
+        '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf -bibtex -f %f")
+        org-latex-listings 'minted
+        org-latex-minted-options
+        '(("bgcolor" "codebg") ("fontsize" "\\scriptsize")))
+#+END_SRC
+
+* Magmas
+  | name       | associativity | identity | invertibility |
+  |------------+---------------+----------+---------------|
+  | group      | yes           | yes      | yes           |
+  | monoid     | yes           | yes      | maybe         |
+  | semigroup  | yes           | maybe    | maybe         |
+  | loop       | maybe         | yes      | yes           |
+  | variety    | maybe         | yes      | maybe         |
+  | quazigroup | maybe         | maybe    | yes           |
+
+* Morphisms
+  | <20>                 | <20>                 | <20>                 | <20>                 |
+  |----------------------+----------------------+----------------------+----------------------|
+  | identity             | $f\circ g\colon Y\to Y$ | $f\colon X\to Y$     | $g\colon Y\to X$     |
+  | section              | $f\colon X\to Y$     |                      |                      |
+  | retraction           | $g\colon Y\to X$     |                      |                      |
+  |----------------------+----------------------+----------------------+----------------------|
+  | homomorphism         | preserves structure  |                      |                      |
+  | isomorphism          | has inverse, one-one onto, f(x + y) = f(x) + f(y), f(xy) = f(x)f(y) |                      |                      |
+  | automorphism         | isomorpism from object to itself |                      |                      |
+  | endomorphism         | homomorphism to itself |                      |                      |
+  |----------------------+----------------------+----------------------+----------------------|
+  | monomorphism         | injective homomorphism | $X \hookrightarrow Y$ | $f \circ g_1 = f \circ g_2 \Rightarrow g_1 = g_2$ |
+  | epimorphism          | dual of monomorphsim |                      | $g_1 \circ f = g_2 \circ f \Rightarrow g_1 = g_2$ |
+  |                      |                      |                      |                      |
+  #+TBLFM: 
+
+* Functions
+  | surjection | more  | fewer |
+  | injection  | fewer | more  |
+  | bijection  | same  | same  |

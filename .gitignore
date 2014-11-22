@@ -6,3 +6,10 @@
 *~
 /assignment-11.pyg
 /assignment-11.run.xml
+*-blx.bib
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.pyg
+*.run.xml

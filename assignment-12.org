@@ -1,0 +1,449 @@
+# -*- fill-column: 80 -*-
+
+#+TITLE:     Assignment 12, Introduction To Mathematics
+#+AUTHOR:    Oleg Sivokon
+#+EMAIL:     olegsivokon@gmail.com
+#+DATE:      <2014-10-24 Fri>
+#+DESCRIPTION: Second asssignment in the course Introduction To Mathematics
+#+KEYWORDS: Introduction To Mathematics, Assignment, Set Theory
+#+LANGUAGE: en
+#+LaTeX_CLASS: article
+#+LATEX_HEADER: \usepackage[usenames,dvipsnames]{color}
+#+LATEX_HEADER: \usepackage[backend=bibtex, style=numeric]{biblatex}
+#+LATEX_HEADER: \usepackage{commath}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usetikzlibrary{shapes,backgrounds}
+#+LATEX_HEADER: \usepackage{marginnote}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage{enumerate}
+#+LaTeX_HEADER: \usemintedstyle{perldoc}
+#+LATEX_HEADER: \hypersetup{urlcolor=blue}
+#+LATEX_HEADER: \hypersetup{colorlinks,urlcolor=blue}
+#+LATEX_HEADER: \addbibresource{bibliography.bib}
+#+LATEX_HEADER: \setlength{\parskip}{16pt plus 2pt minus 2pt}
+#+LATEX_HEADER: \definecolor{codebg}{rgb}{0.96,0.99,0.8}
+
+#+BEGIN_SRC emacs-lisp :exports none
+  (setq org-latex-pdf-process
+        '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf -bibtex -f %f")
+        org-latex-listings 'minted
+        org-latex-minted-options
+        '(("bgcolor" "codebg") ("fontsize" "\\scriptsize")))
+#+END_SRC
+
+#+RESULTS:
+| bgcolor  | codebg      |
+| fontsize | \scriptsize |
+
+\clearpage
+
+* Problems
+
+** Problem 1
+
+   1. Given $A = \{1, \{1\}\}$ and $B = \{1, \emptyset\}$ write down:
+      
+      $P(A)$, $P(B)$, $P(A) \setminus B(B)$, $P(B) \setminus B$, $P(A) \setminus \{A\}$.
+   2. Given set $C$, prove or disprove:
+      #+ATTR_LATEX: :options [(i)]
+      1. $P(C) \cap C = \emptyset$
+      2. $P(C) \cap C \neq \emptyset$
+
+*** Answer 1
+
+    \begin{equation}
+    \begin{split}
+    & P(A) = \{\emptyset, \{1\}, \{\{1\}\}, \{1, \{1\}\}\} \\
+    & P(B) = \{\emptyset, \{1\}, \{\emptyset\}, \{1, \emptyset\}\} \\
+    & P(A) \setminus B(B) = \{\{\{1\}\}, \{1, \{1\}\}\} \\
+    & P(A) \setminus \{A\} = \{\emptyset,  \{\{1\}\}, \{1, \{1\}\} \}
+    \end{split}
+    \end{equation}
+
+*** Answer 2
+    (i) is clearly false if only because constructing a powerset would had to be
+    an identity operation.  Since a single example suffices to disprove a claim,
+    I will proceed by constructing an example:
+
+    Assume $C = \{\emptyset\}$, then:
+
+    \begin{equation}
+    \begin{split}
+    & P(C) = \{\emptyset, \{\emptyset\}\} \\
+    & P(C) \cap C = \{\emptyset\}
+    \end{split}
+    \end{equation}
+
+    We assumed $P(C) \cap C$ to be $\emptyset$, but discovered it to be
+    $\{\emptyset\}$, which is a contradiction.  Therefore the inital claim is
+    false.
+
+*** Answer 3
+    (ii) is flase, we can certainly have sets where intersection of that set with
+    the set of its subsets will produce no results.  In fact any set that contains
+    no other sets will produce an empty result under intersection.  For example:
+
+    Assume $C = \{1\}$, then:
+
+    \begin{equation}
+    \begin{split}
+    & P(C) = \{\emptyset, \{1\}\} \\
+    & P(C) \cap C = \emptyset
+    \end{split}
+    \end{equation}
+
+    We assumed $P(C) \cap C \neq \emptyset$, but discovered that it is also
+    possible that $P(C) \cap C = \emptyset$, which is a contradiction.
+    Therefore the initial claim is false.
+
+
+** Problem 2
+   Given sets $A$, $B$, and $C$ prove that:
+   
+   1. $(A \cup B) \setminus C = (A \setminus C) \cup (B \setminus C)$.
+   2. $A \setminus (B \setminus C) \subseteq (A \setminus B) \setminus C \implies A \cap C = \emptyset$.
+   
+   Prove or disprove:
+
+   1. $P(A) \subseteq B \implies \{\emptyset, A\} \in P(B)$.
+   2. $\{\emptyset, A\} \in P(B) \implies P(A) \subseteq B$.
+
+*** Answer 4
+    I will prove this using a method similar to proving the distributivity property of
+    union over intersection.
+
+    To prove by contradiction, we need to examine two cases:
+
+    1. There is $x \in (A \cup B) \setminus C$ such that 
+       $x \not \in ((A \setminus C) \cup (B \setminus C))$.
+    2. There is $x \in ((A \setminus C) \cup (B \setminus C))$ such that
+       $x \not \in (A \cup B) \setminus C$.
+    
+    (1) For $x$ to be member of a difference of sets would mean it has to be the
+    member of minuend (by definition of subtraction).  We find that minuend is
+    the union of sets, which means that, by definition of union, $x$ could come
+    from either one of the unioned sets.  So, for $x$ not to be in the left-hand side
+    of the formula it would mean that it must be the case that it is either not in
+    the union of $A$ and $B$, or that it is in $C$.  Neither of which is true, which
+    is easy to become convinced of by observing the two parts of the right-hand side
+    of the formula: if $x \not \in (A \setminus C)$ then it absolutely has to be in
+    $B$ and not in $C$, which is exactly what the rest of the formula negates.
+    Thus we arrive at contradiction.  It must be the case that whenever
+    $x \in (A \cup B) \setminus C$ it is also the case that
+    $x \in ((A \setminus C) \cup (B \setminus C))$.
+
+    (2) By symmetrical argument we show that if
+    $x \in ((A \setminus C) \cup (B \setminus C))$ then it is the case that
+    $x \in (A \cup B) \setminus C$.
+
+    Having proved both cases we now conclude that union is distributive over
+    subtraction.
+
+*** Answer 5
+    To prove the claim, I'm going to show that there is no such $x$, for which
+    both:
+    $x \in (A \setminus (B \setminus C) \subseteq (A \setminus B) \setminus C)$
+    and $x \in (A \cap C)$ is true at the same time.  Proving this is equivalent
+    to proving the initial claim because if this was the case, then $A \cap C$
+    would not be an empty set (it would had to contain $x$), or
+    $A \setminus (B \setminus C) \subseteq (A \setminus B) \setminus C$ would be
+    false (these are the only two cases how a material implication can fail, from
+    definition of material implication).
+
+    For $x$ to be a member of $A \cap C$ means that it is both in $A$ and in $C$
+    (by definition of intersection).  This can only happen when we /don't/
+    subtract $C$ from the result (otherwise the $A \cap C$ would be an empty set).
+    This only happens in $A \setminus (B \setminus C)$.  This means that if the
+    initial claim was true, there had to be such elements in
+    $A \setminus (B \setminus C)$, which are not in $(A \setminus B) \setminus C$,
+    but this contradicts the definition of set inclusion.  Since we arrived at
+    contradiction in our initial claim, which we set to disprove, we arrived at
+    the proof.
+
+*** Answer 6
+    Both $A$ and $\emptyset$ are certainly the members of $P(A)$, so if $B$
+    contains at least all the elements of $P(A)$, it certainly contains both the
+    $A$ and the $\emptyset$.  Then, of course, $P(B)$ must contain a set
+    containing two elements of $P(A)$, $\{A, \emptyset\}}$ among them.
+
+*** Answer 7
+    This is a false claim, here's an assignment that holds for antecedent, but
+    doesn't for consequent:
+
+    \begin{equation}
+    \begin{split}
+    & A = \{a, b\} \\
+    & P(A) = \{\emptyset, \{a\}, \{b\}, \{a, b\}\} \\
+    & B = \{\emptyset, \{a, b\}\} \\
+    & P(B) = \{\emptyset, \{\emptyset\}, \{\{a, b\}\}, \{\emptyset, \{a, b\}\}\} \\
+    & \{A, \emptyset\} \in P(B) = \{\emptyset, \{a, b\}\} \in P(B) =
+    \{\emptyset, \{a, b\}\} \in \{\emptyset, \{\emptyset\}, \{\{a, b\}\},
+    \{\emptyset, \{a, b\}\}\} \\
+    & P(A) \not \subseteq B = \{\emptyset, \{a\}, \{b\}, \{a, b\}\} \not \subseteq
+    \{\emptyset, \{a, b\}\}
+    \end{split}
+    \end{equation}
+
+    I.e. it is possible to construct such set $B$ that its powerset would satisfy
+    the left-hand side of the formula, but fail the right-hand side.
+
+
+** Problem 3
+   1. Given a binary operation * on even numbers $A = \{2x | x \in \mathbb{N}\}$, for
+      all $x, y \in A$ the following holds:
+      
+      \begin{equation}
+      x * y = \frac{(x - 2)(y - 2)}{2} + 2
+      \end{equation}
+      
+      Verify whether $A$ is closed under *, that * is associative, that there exists
+      an identity element and that every element has its inverse under this operation.
+   2. Assume now that $A$ is defined as $A = \{2x | x \in \mathbb{Q}\}$, give the 
+      characteristics of properties outlined in (1).
+
+*** Answer 8
+    In order to show that $A$ is closed under *, observe that adding 2 to any
+    even number will not make it odd.  We can thus disregard the addition.
+    Next, observe that in order for division by 2 to produce an even number the
+    divident must be divisible by 4.  Our dividen is a product of two numbers.
+    If we can show that both of them are even (that is each of them has a factor
+    of two), then their product must be a multiple of 4.  This problem is thus
+    equivalent to showing that even numbers are closed under subtraction of 2.
+    Given our definition of $A$, it is possible to produce 0 as the result of
+    the $(x - 2)(y - 2)/2$, if either $x$ or $y$ are equal to 2, however, the +2
+    part saves us from ever obtaining a final result less then 2.  Thus, I
+    conclude that $A$ is closed under *.
+
+    To prove $(x * y) * z = x * (y * z)$ observe that the problem scales down to
+    proving associativity of multiplication (since other function terms have no effect
+    on associativity property).  I.e. we actually need to prove
+    $((x - 2)(y - 2))(z - 2) = (x - 2)((y - 2)(z - 2))$ which is true, so long
+    multiplication on natural numbers is associative.
+
+    The definition of identity element is $ix = x$. And there is such element,
+    namely 4.  Since the function behaves similarly to multiplication, I looked
+    for the transformation I'd had to perform on the multiplication identity
+    element in order to find one here.  But, I wouldn't know of a proof of it
+    being the identity element.
+
+    Not all elements have their inverses in $A$. Inverse is defined to be $x * y = i$,
+    where $i$ is the identity element, whose existence we just established.  But
+    and since this function behaves equivalently to multiplication, we can assume
+    that its values only increase, therefore 6 * 2 = 2, 6 * 4 = 6, 6 * 6 = 10, ...
+    I.e. there would be no inverse for 6.  Another way to think about the problem
+    is to notice that 4, the identity element has no odd factors, but some even
+    numbers do have such factors.  By using only multiplication and no rationals less
+    then 1, we cannot possibly arrive from a number with odd factors to a number which
+    doesn't have them.
+
+*** Answer 9
+    The closure property will hold if we substitute $\mathbb{Q}$ for $\mathbb{N}$.
+    Even though we now allow negative numbers, we are no longer constrained by natural
+    numbers range.  Using this function we never create irrational numbers, because
+    all its input and its terms are integers.
+
+    Associativity holds just as it did before, we didn't rely on the properties of
+    integers to show the associativity the first time.
+
+    Consequently, the identity elements remains the same element.
+
+    However, now we have a chance of finding inverses for all elements!
+
+    It looks like the function:
+    \begin{equation}
+    x *' y = \frac{1}{2} - \frac{2}{(x + 2)(y + 2)}
+    \end{equation}
+    Will inverse the effect of the original definition, but it doesn't, becuase when
+    either $x = -2$ or $y = -2$ it results in division by zero.
+
+* Exercises
+  Given $A = \{a\}$, and a binary operation defined on it such that $a * a = a$.
+  $B = \{a, b\}$ and binary operation + defined on $B$ as follows:
+  
+  | + | a | b |
+  |---+---+---|
+  | a | a | b |
+  | b | b | b |
+
+  $C = \{a, b, c\}$  and binary operation % defined on $C$ as follows:
+
+  | % | a | b | c |
+  |---+---+---+---|
+  | a | a | b | c |
+  | b | b | a | c |
+  | c | c | a | a |
+
+  $D$ is a non-empty set, $n, m \in \mathbb{N}$, $exp$ is the exponentiation function
+  defined on $\mathbb{N}$. $f$ defined as follows:
+
+  \begin{equation}
+  f(x, y) = xy \bmod 10
+  \end{equation}
+
+  $G$ is a group, with $\circ$ being its group operation, $e$ being its identity
+  element, having $a$, $b$ and $c$ as it members (it is also possible that $G$
+  has other members), $Commutative(S, O)$ predicate meaning that set $S$, its argument,
+  is commutative under operation $O$.
+  
+  Answer the following questions using:
+  
+  + *a* if only the first statement is correct.
+  + *b* if only the second statement is correct.
+  + *c* if both statements are correct.
+  + *d* if neither statement is correct.
+
+** Exercise 1
+   1. $A$ is closed under *.
+   2. * is not associative becuase $A$ has less then three members.
+
+   /Answer:/ *a*
+
+** Exercise 2
+   1. $a$ is the identity element of $A$ under *.
+   2. $A$ is a group under *.
+
+   /Answer:/ *c*
+
+** Exercise 3
+   1. $B$ is closed under +.
+   2. + is associative.
+
+   /Answer:/ *c*
+
+** Exercise 4
+   1. $b$ is the identity element in $B$.
+   2. $B$ is a group under +.
+
+   /Answer:/ *d*
+
+** Exercise 5
+   1. % is associative.
+   2. There is identity element in $C$ under %.
+
+   /Answer:/ *b*
+
+** Exercise 6
+   1. $b$ is the inverse of $c$ under %.
+   2. $c$ is the inverse of $c$ under %.
+
+   /Answer:/ *b*
+
+** Exercise 7
+   1. % is commutative.
+   2. Every member of $A$ has an inverse under %.
+
+   /Answer:/ *c*
+
+** Exercise 8
+   1. $P(D)$ is closed under $\cap$ (set intersection).
+   2. $\cap$ is associative in $P(D)$.
+      
+   /Answer:/ *c*
+
+** Exercise 9
+   1. $\emptyset$ is the identity element of $P(D)$ under $\cap$.
+   2. $D$ has an inverse in $P(D)$ under $\cap$.
+      
+   /Answer:/ *b*
+
+** Exercise 10
+   1. $P(D)$ is closed under $\setminus$ (set subtraction).
+   2. $\setminus$ is associative in $P(D)$.
+
+   /Answer:/ *a*
+
+** Exercise 11
+   1. $\emptyset$ is the identity element of $P(D)$ under $\setminus$.
+   2. $\emptyset$ is the identity element of $P(D)$ under $\cup$.
+
+   /Answer:/ *c*
+
+** Exercise 12
+   1. $exp$ is associative.
+   2. $exp$ has an identity element.
+
+   /Answer:/ *b*
+
+** Exercise 13
+   1. $\{2, 4, 6, 8\}$ is a group under $f$.
+   2. $\{1, 3, 5, 7, 9\}$ is a group under $f$.
+
+   /Answer:/ *a*
+
+** Exercise 14
+   1. $(x \in G \land x \circ x = x) \implies (x = e)$.
+   2. $(x \in G \land x \circ x = e) \implies (x = e)$.
+
+   /Answer:/ *b*
+
+** Exercise 15
+   1. $(a \circ b = b \circ a) \implies Commutative(G, \circ)$.
+   2. $(a = b^{-1}) \implies (b = a^{-1})$.
+
+   /Answer:/ *d*
+
+** Exercise 16
+   1. $\forall x, y, z \in G ((x \circ y = x \circ z) \implies (y = z))$.
+   2. $\forall x, y, z \in G ((x \circ y = y \circ z) \implies (x = z))$.
+
+   /Answer:/ *d*
+
+** Exercise 17
+   1. The diagonal of the table describing $\circ$ on $G$ all members of $G$ 
+      must appear.
+   2. $a$ appears exactly once in every column and every row of the table 
+      dscribing $\circ$ on $G$.
+
+   /Answer:/ *d*
+
+** Exercise 18
+   1. $(a \circ b \circ c)^{-1} = a^{-1} \circ b^{-1} \circ c^{-1}$.
+   2. $((a \circ b)^{-1} \neq a^{-1} \circ b^{-1}) \implies \lnot Commutative(G, \circ)$.
+
+   /Answer:/ *a*
+
+** Exercise 19
+   1. $(a \circ b = e) \implies (b \circ a = e)$.
+   2. If $G$ has exactly four members and $a \circ b = c$, then $b \circ a = c$.
+
+   /Answer:/ *d*
+
+** Exercise 20
+   1. Any group with one, two or three members is commutative.
+   2. Any group is commutative.
+
+   /Answer:/ *a*
+
+** Exercise 21
+   Let $A$ be a group with three members.
+   1. There should exist a binary operation that conforms to all requirements of 
+      group operation sans associativity.
+   2. There exists a binary operation on $A$ which doesn't support associativity
+      but has the cancellation property.
+
+   /Answer:/ *b*
+
+** Exercise 22
+   Let $A$ be a set with defined binary operation *, which conforms to all
+   group properties sans inverse element.
+   1. If * is commutative, then $A$ is a group under *.
+   2. If * supports the cancellation property, then $A$ is a group under *.
+
+   /Answer:/ *d*
+
+** Exercise 23
+   We define a binary operation on $\mathbb{N} \cup \{{1\over 2}\}$ thus:
+   $(\forall x, y \in \mathbb{N} \cup \{{1\over 2}\}): x \Delta y = 2xy$.
+   1. $\Delta$ has the cancellation property.
+   2. $\mathbb{N} \cup \{{1\over 2}\}$ is a group under $\Delta$.
+
+   /Answer:/ *c*
+
+** Exercise 24
+   Let $G$ be something defined elsewhere.
+   1. $(\exists x, y, z \in G): x \circ y = y \circ z$, but $x \neq z$.
+   2. $(\forall x \in G): x \circ x = I \lor x \circ x \circ x = I$.
+
+   /Answer:/ *not a foggiest idea*
+
+

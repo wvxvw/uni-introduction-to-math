@@ -1,0 +1,159 @@
+# -*- fill-column: 80; org-confirm-babel-evaluate: nil -*-
+
+#+TITLE:     Assignment 13, Introduction To Mathematics
+#+AUTHOR:    Oleg Sivokon
+#+EMAIL:     olegsivokon@gmail.com
+#+DATE:      <2014-11-22 Sat>
+#+DESCRIPTION: Second asssignment in the course Introduction To Mathematics
+#+KEYWORDS: Introduction To Mathematics, Assignment, Set Theory
+#+LANGUAGE: en
+#+LaTeX_CLASS: article
+#+LATEX_HEADER: \usepackage[usenames,dvipsnames]{color}
+#+LATEX_HEADER: \usepackage[backend=bibtex, style=numeric]{biblatex}
+#+LATEX_HEADER: \usepackage{commath}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usetikzlibrary{shapes,backgrounds}
+#+LATEX_HEADER: \usepackage{marginnote}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage{enumerate}
+#+LaTeX_HEADER: \usemintedstyle{perldoc}
+#+LATEX_HEADER: \hypersetup{urlcolor=blue}
+#+LATEX_HEADER: \hypersetup{colorlinks,urlcolor=blue}
+#+LATEX_HEADER: \addbibresource{bibliography.bib}
+#+LATEX_HEADER: \setlength{\parskip}{16pt plus 2pt minus 2pt}
+#+LATEX_HEADER: \definecolor{codebg}{rgb}{0.96,0.99,0.8}
+
+#+BEGIN_SRC emacs-lisp :exports none
+  (setq org-latex-pdf-process
+        '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf -bibtex -f %f")
+        org-latex-listings 'minted
+        org-latex-minted-options
+        '(("bgcolor" "codebg") ("fontsize" "\\scriptsize")))
+#+END_SRC
+
+#+RESULTS:
+| bgcolor  | codebg      |
+| fontsize | \scriptsize |
+
+\clearpage
+
+* Problems
+
+** Problem 1
+
+   1. Given $G$ is a group under $\circ$ and $(\forall x, y \in G): x \circ y \circ x = y$.
+      Show that every member of $G$ is its own inverse and that $G$ is commutative.
+      
+   2. Given $G$ is a group under $\circ$, $x, y \in G$ and $x$ being the inverse of 
+      $x \circ y$, show that $G$ is commutative.
+
+*** Answer 1
+
+    First, we will show that every element of $G$ is its own inverse.  By definition of
+    invertibility, $y \circ y^{-1} = 1$, 1 being the identity element.  Thus:
+
+    #+HEADER: :exports results
+    #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
+    #+BEGIN_SRC latex
+      \begin{equation*}
+        \begin{array}{lll}
+          x \circ y \circ x = y & \iff &
+          \textrm{given} \\
+          x \circ (y \circ y^{-1}) \circ x = y \circ y^{-1} & \iff &
+          \textrm{using group cancellation property} \\
+          x \circ x = 1 & &
+          \textrm{by definition of identity element} \\
+        \end{array}
+      \end{equation*}
+    #+END_SRC
+
+    Since we selected $x$ arbitrary, it follows that
+    $(\forall x \in G): x \circ x = 1$, in other words, each element is its own inverse.
+
+    Having shown that $(\forall x \in G): x = x^{-1}$, we can use this fact to show that
+    $G$ is commutative.  Since $(x \circ y)$ is in $G$, it must be that
+    $(x \circ y) \circ (x \circ y)^{-1} = 1$ (1 being the identity element).  By
+    associativity, we can remove the parenthesis, and use the fact that each element
+    is its own inverse: $x \circ y \circ x \circ y = 1$, (*).
+
+    #+HEADER: :exports results
+    #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
+    #+BEGIN_SRC latex
+      \begin{equation*}
+        \begin{array}{llll}
+          x \circ y & = & x \circ (1 \circ y)                           & \textrm{$1 = 1 \circ y$} \\
+                    & = & x \circ (x \circ y \circ x \circ y) \circ y   & \textrm{invoke (*)} \\
+                    & = & (x \circ x) \circ y \circ x \circ (y \circ y) & \textrm{by associativity} \\
+                    & = & y \circ x                                     & \textrm{completes the proof} \\
+        \end{array}
+      \end{equation*}
+    #+END_SRC
+
+*** Answer 2
+
+    In order to prove commutativity we need to show that $y \circ x = x \circ y$.
+    We will start by restating the problem /(1 is the identity element)/:
+    
+    #+HEADER: :exports results
+    #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
+    #+BEGIN_SRC latex
+      \begin{equation*}
+        \begin{array}{lll}
+          (x \circ y) \circ x = 1                  & \iff &
+          \textrm{given} \\
+          (x \circ y) \circ x = x \circ x^{-1}      & \iff &
+          \textrm{by definition of identity} \\
+          (x \circ y) \circ x = x \circ (x \circ y) & \iff &
+          \textrm{from $x^{-1} = (x \circ y)$} \\
+          x \circ (y \circ x) = x \circ (x \circ y) & \iff &
+          \textrm{by associativity} \\
+          y \circ x = x \circ y                     &      &
+          \textrm{by group cancellation property} \\
+        \end{array}
+      \end{equation*}
+    #+END_SRC
+
+    Having showed that $y \circ x = x \circ y$ we completed the proof.
+
+* Exercises
+  Given $A = \{a\}$, and a binary operation defined on it such that $a * a = a$.
+  $B = \{a, b\}$ and binary operation + defined on $B$ as follows:
+  
+  | + | a | b |
+  |---+---+---|
+  | a | a | b |
+  | b | b | b |
+
+  $C = \{a, b, c\}$  and binary operation % defined on $C$ as follows:
+
+  | % | a | b | c |
+  |---+---+---+---|
+  | a | a | b | c |
+  | b | b | a | c |
+  | c | c | a | a |
+
+  $D$ is a non-empty set, $n, m \in \mathbb{N}$, $exp$ is the exponentiation function
+  defined on $\mathbb{N}$. $f$ defined as follows:
+
+  \begin{equation}
+  f(x, y) = xy \bmod 10
+  \end{equation}
+
+  $G$ is a group, with $\circ$ being its group operation, $e$ being its identity
+  element, having $a$, $b$ and $c$ as it members (it is also possible that $G$
+  has other members), $Commutative(S, O)$ predicate meaning that set $S$, its argument,
+  is commutative under operation $O$.
+  
+  Answer the following questions using:
+  
+  + *a* if only the first statement is correct.
+  + *b* if only the second statement is correct.
+  + *c* if both statements are correct.
+  + *d* if neither statement is correct.
+
+** Exercise 1
+   1. $A$ is closed under *.
+   2. * is not associative becuase $A$ has less then three members.
+
+   /Answer:/ *a*
+
