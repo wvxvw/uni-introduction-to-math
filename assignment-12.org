@@ -29,6 +29,9 @@
         org-latex-listings 'minted
         org-latex-minted-options
         '(("bgcolor" "codebg") ("fontsize" "\\scriptsize")))
+(defmacro by-backend (&rest body)
+    `(cl-case (when (boundp 'backend) (org-export-backend-name backend))
+       ,@body))
 #+END_SRC
 
 #+RESULTS:

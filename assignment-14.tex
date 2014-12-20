@@ -1,0 +1,273 @@
+% Created 2014-12-20 Sat 19:02
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage[utf8]{inputenc}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[backend=bibtex, style=numeric]{biblatex}
+\usepackage{commath}
+\usepackage{tikz}
+\usetikzlibrary{shapes,backgrounds}
+\usepackage{marginnote}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumerate}
+\hypersetup{urlcolor=blue}
+\hypersetup{colorlinks,urlcolor=blue}
+\addbibresource{bibliography.bib}
+\setlength{\parskip}{16pt plus 2pt minus 2pt}
+\definecolor{codebg}{rgb}{0.96,0.99,0.8}
+\definecolor{codestr}{rgb}{0.46,0.09,0.2}
+\author{Oleg Sivokon}
+\date{\textit{<2014-12-19 Fri>}}
+\title{Assignment 14, Introduction To Mathematics}
+\hypersetup{
+  pdfkeywords={Introduction To Mathematics, Assignment, Set Theory},
+  pdfsubject={Second asssignment in the course Introduction To Mathematics},
+  pdfcreator={Emacs 25.0.50.1 (Org mode 8.2.2)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\lstset{ %
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\scriptsize,
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=false,
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  framexleftmargin=10pt,
+  xleftmargin=10pt,
+  framerule=0pt,
+  frame=tb,                        % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stringstyle=\color{codestr},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+}
+
+\clearpage
+
+\section{Problems}
+\label{sec-1}
+
+\subsection{Problem 1}
+\label{sec-1-1}
+
+Given $A = \{1, 2\}$ and $B = \mathbb{N}$.
+\begin{enumerate}
+\item Describe all functions from $A$ to $B$, which are not one-to-one (bijective).
+\item Describe all functions from $B$ to $A$ which are not onto.
+\item Prove or disprove:
+\begin{itemize}
+\item There exist functions $f : A \to B$ and $g : B \to A$ such that $f \circ g$
+has an inverse.
+\item There exist functions $f : A \to B$ and $g : B \to A$ such that $g \circ f$
+has an inverse.
+\end{itemize}
+\end{enumerate}
+
+\subsubsection{Answer 1}
+\label{sec-1-1-1}
+
+Let's first give a name for any function $f : A \to B$.  Now, any $f$, which sends
+either of the elements of $A$ (of which there are two) to the same element of
+$B$ would be non-bijective.  We can describe the set of all such functions using
+this formula:
+
+\begin{equation*}
+  F = \{(a,b) |
+  a \in A,
+  b \in B,
+  \exists a' \in A: a' \neq a \land f(a) = f(a') \}
+\end{equation*}
+
+To make this more concrete: all functions $f$ which assign the same value in $B$ to
+either 1 or 2 are non-bijections.  This is assuming $f$ is defined for all inputs.
+\subsubsection{Answer 2}
+\label{sec-1-1-2}
+
+Let's, again, give a name for all functions from $B$ to $A$, viz. $g : B \to A$.
+The function is onto (surjective) iff every value in its codomain has an origin
+in its domain.  We can describe all such functions using this formula:
+
+\begin{equation*}
+  G = \{(b,a) |
+  a \in A,
+  b \in B,
+  \forall b' \in B: g(b) = g(b') \}
+\end{equation*}
+
+Or, in other words, all functions which send all elements of $B$ to the same
+element of $A$ (be it 1 or 2), are not surjective.
+\subsubsection{Answer 3}
+\label{sec-1-1-3}
+Yes, there exist such functions.  For example, $g$ may be defined to return
+1 if the input is odd and 2, when the input is even.  Then, if $f$ sends
+its input to an odd number, given 1 and to an even number, given 2, the
+composition $f \circ g$ is simply the identity function.
+\subsubsection{Answer 4}
+\label{sec-1-1-4}
+We, however, cannot define a $g \circ f$ function with an inverse.  The
+intuition behind this is that we lose information by sending elments from a
+larger domain to a smaller one.  More formally, we can procede by pigeonhole
+principle, seeing how any function $g$ (provided it is defined for all
+inputs) would have to send its input to the same element in $A$, while
+afterwards there would be no way of distinguishing that element from the one
+obtained by earlier applicatin of $g$.
+\subsection{Problem 2}
+\label{sec-1-2}
+Given $f : A \to B$ and $C \subseteq A$.
+
+\begin{enumerate}
+\item Prove that $C \subseteq f^{-1}(f(C))$.
+\item Prove that if $f$ is a bijection, then $C = f^{-1}(f(C))$.
+\item Show sets $A$, $B$, $C$ and function $f:A \to B$ such that it holds that
+      $C \subset f^{-1}(f(C))$.
+\end{enumerate}
+
+\subsubsection{Answer 5}
+\label{sec-1-2-1}
+Let's assume by contradiction, that there exists $d$ in $D = A \setminus C$,
+such that it is in the codomain of $f^{-1}$.  Existence of sucn an element
+would in turn imply existence of element $b \in B$ such that $f^{-1}(b) = d$.
+This would in turn imply existence of $c \in C$ such that $f(c) = b$.
+But by the definition of inverse, $f^{-1}(b)=c$ and $c \in C$, while we
+assumed the contrary.  Since our initial assumption failed, it must be the
+case that the elements of codomain of $f^{-1}$ must come from $C$.
+\subsubsection{Answer 6}
+\label{sec-1-2-2}
+Since $f$ is a bijection, it's inverse must be a bijection too (otherwise it
+would not be able to assign to all the elements in its image all the values in
+its domain).  Composition of two bijections is necessarily a bijection, thus
+$C = f^{-1}(f(C))$.
+\subsubsection{Answer 7}
+\label{sec-1-2-3}
+Below is a minimal example of the inverse function being partial to $f$:
+
+\begin{align*}
+  A &= \{1, 2, 3\} \\
+  B &= \{1, 2, 3\} \\
+  C &= \{1, 2\} \\
+  f(1) &= 1 \\
+  f(2) &= 1 \\
+  f^{-1}(1) &= 1
+\end{align*}
+\subsection{Problem 3}
+\label{sec-1-3}
+Given functions $f$ and $g$ both are from $\mathbb{N}$ to $\mathbb{N}$.
+$g$ is known to be onto and for all $n$ in $\mathbb{N}$ it holds that
+
+\begin{equation*}
+  (f \circ g)(n) = 2n - 1
+\end{equation*}
+
+\begin{enumerate}
+\item Prove that $f$ is not surjective.
+\item Prove that $f$ is bijective.
+\item Show such $f$ and $g$ that satisfy the formula given above.
+\end{enumerate}
+
+\subsubsection{Answer 8}
+\label{sec-1-3-1}
+Suppose, by contradiction, that $f$ was surjective, this would imply
+that any even number, in particular, the number 2 in the image of $f$
+would have to have its origin in $\mathbb{N}$, but the origin of 2 is in
+$\mathbb{Q}$, but not in $\mathbb{N}$, i.e.
+$n = \frac{1}{2} \implies 2n - 1 = 2$.  Because we know that $g$ is
+surjective, it must be $f$, which is not surjective (the composition
+of surjective functions is surjective).
+\subsubsection{Answer 9}
+\label{sec-1-3-2}
+Suppose $f$ is not bijective, this woul3d imply there exist
+$x, x' \in \mathbb{N}$ such that $x \neq x'$ while $x = 2n - 1$
+and $x' = 2n - 1$, which is a contradiction.
+\subsubsection{Answer 10}
+\label{sec-1-3-3}
+The simplest example would be to take $g$ equal to identity and $f$
+being $f(n) = 2n - 1$.  The argument for $f$ not being surjective is
+essentially the same as in \ref{sec-1-3-1}.
+\subsection{Problem 4}
+\label{sec-1-4}
+Let $G$ be a group with $*$ being the group operation.  Let also $a \in G$.
+Given a function $f : G \to G$ defined as
+$\forall x \in G: f(x) = a^{-1} * x * a$.
+
+\begin{enumerate}
+\item Prove that $f$ is surjective and bijective.
+\item Find $f^{-1}$.
+\item Prove that if $b, c \in G$ are each others inverses, then the same is
+true of $f(b)$ and $f(c)$.
+\end{enumerate}
+
+\subsubsection{Answer 11}
+\label{sec-1-4-1}
+Suppose $f$ was not bijective, this would imply that there could be
+$a^{-1} * x * a = a^{-1} * x' * a$ for some $x \neq x'$.  But using group
+cancellation property we could reduce $a^{-1} * x * a = a^{-1} * x' * a$ to
+$x = x'$, obtaining contradiction.  Hence $f$ is a bijection.
+
+$x$ is defined to be a member of $G$.  Since $G$ is closed under $*$, it
+means that there can't be any values in the domain of $f$ which are not in
+its co-domain.  In other words, suppose there was a $x' \in G$, which cannot
+be produced by $f(x)$, that is, if we look at the operation table, each
+column of this table will have to have as many rows as there are elements.
+But no two rows in this column can repeat because this would defy the
+cancellation property (i.e. it would mean that for some $p, q, r, s$ it
+would be that $p * q = r$ and $p * s = r$, $r$ being the value, which repeats
+in the selected column and $q, s$ are the elements for which it repeats.
+Hence $f$ must be onto (surjective).
+\subsubsection{Answer 12}
+\label{sec-1-4-2}
+By definition of inverse, applying the group operation to inverse and the
+element it is inverse of will give us the identity element:
+
+\begin{align*}
+  (a^{-1} * x * a) * (a^{-1} * x * a)^{-1} & = a^{-1} * a
+  & \textrm{given} \\
+  x * a * (a^{-1} * x * a)^{-1} & = a
+  & \textrm{by group cancellation property} \\
+  x^{-1} * x * a * (a^{-1} * x * a)^{-1} & = x^{-1} * a
+  & \textrm{again, by group cancellation property} \\
+  a * (a^{-1} * x * a)^{-1} & = x^{-1} * a
+  & \textrm{by group operation on inverses} \\
+  a^{-1} * a * (a^{-1} * x * a)^{-1} & = a^{-1} * x^{-1} * a
+  & \textrm{by cancellation property} \\
+  (a^{-1} * x * a)^{-1} & = a^{-1} * x^{-1} * a
+  & \textrm{by group operation on inverses}
+\end{align*}
+
+Hence $f^{-1}(x) = a^{-1} * x^{-1} * a$.
+\subsubsection{Answer 13}
+\label{sec-1-4-3}
+Provided $b = c^{-1}, c = b^{-1}$, the next equalities hold:
+
+\begin{equation*}
+  \begin{array}{lllllll}
+    f(b) & = & a^{-1} * b * a & = & a^{-1} * c^{-1} * a & = & f(c^{-1}) \\
+    f(c) & = & a^{-1} * c * a & = & a^{-1} * b^{-1} * a & = & f(b^{-1}) \\
+  \end{array}
+\end{equation*}
+
+Which is what we were asked to prove.
+% Emacs 25.0.50.1 (Org mode 8.2.2)
+\end{document}
