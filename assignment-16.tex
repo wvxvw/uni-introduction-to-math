@@ -1,0 +1,403 @@
+% Created 2015-01-17 Sat 23:36
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage[utf8]{inputenc}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[backend=bibtex, style=numeric]{biblatex}
+\usepackage{commath}
+\usepackage{tikz}
+\usetikzlibrary{shapes,backgrounds}
+\usepackage{marginnote}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumerate}
+\hypersetup{urlcolor=blue}
+\hypersetup{colorlinks,urlcolor=blue}
+\addbibresource{bibliography.bib}
+\setlength{\parskip}{16pt plus 2pt minus 2pt}
+\definecolor{codebg}{rgb}{0.96,0.99,0.8}
+\definecolor{codestr}{rgb}{0.46,0.09,0.2}
+\author{Oleg Sivokon}
+\date{\textit{<2015-01-17 Sat>}}
+\title{Assignment 16, Introduction To Mathematics}
+\hypersetup{
+  pdfkeywords={Introduction To Mathematics, Assignment, Set Theory},
+  pdfsubject={Sixth asssignment in the course Introduction To Mathematics},
+  pdfcreator={Emacs 25.0.50.1 (Org mode 8.2.2)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\lstset{ %
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\scriptsize,
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=false,
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  framexleftmargin=10pt,
+  xleftmargin=10pt,
+  framerule=0pt,
+  frame=tb,                        % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stringstyle=\color{codestr},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+}
+
+\clearpage
+
+\section{Problems}
+\label{sec-1}
+
+\subsection{Problem 1}
+\label{sec-1-1}
+Given a system of axioms concerning ``points'', ``lines'' and a relation
+``on'' \emph{(point on a line)}:
+
+\begin{enumerate}
+\item Given two distinct points $A$ and $B$, and two distinct lines $\ell_1$
+and $\ell_2$ such that $A$ and $B$ are on both of them.
+\item For every line $\ell$ there is a point $P$ which is not on $\ell$.
+\begin{itemize}
+\item Prove that the system is consistent.
+\item Prove that the system is not categorical.
+\item Prove that the system is independant.
+\item Prove that the system entails theorem ``There exist at least four points''.
+\end{itemize}
+\end{enumerate}
+
+\subsubsection{Answer 1}
+\label{sec-1-1-1}
+In order to show consistency it is enough to find a model for the system.
+Let's find such a model.  If I consider lines as sets, then I can imagine
+a system with lines $\ell_1=\{A,B,P_1\}$ and $\ell_2=\{A,B,P_2\}$.
+By construction points $A,B$ are on both
+$\ell_1$ and $\ell_2$, $P_1 \not \in \ell_2$ and $P_2 \not \in \ell_1$.
+This satisfies both axioms, hence the model is consistent.
+\subsubsection{Answer 2}
+\label{sec-1-1-2}
+In order to show that the system is not categorical I need to find at least
+two models not isomorphic to each other.  Observe that we can easily extend
+the model given in \ref{sec-1-1-1} by appending points to either of two lines
+without violating any of the two axioms.  Thus, for example, a model
+$\ell_1=\{A,B,P_1,P_3\},\ell_2=\{A,B,P_2\}$ would still satisfy both axioms
+but would not be isomorphic to the system I extended because the first one
+didn't have point $P_3$ in it.
+\subsubsection{Answer 3}
+\label{sec-1-1-3}
+To show independence, I need to find such models where one of the axioms
+in the system in question doesn't hold, but other do.  An example of such
+system could be modeled using the model from the \ref{sec-1-1-1} with a line $\ell_3$
+appended to it such that $\ell_3=\{A,B,P_1,P_2\}$.  This would allow for
+the first axiom to hold, while the second axiom would be violated (as there
+would be no points that are not on $\ell_3$.
+\subsubsection{Answer 4}
+\label{sec-1-1-4}
+I am given at least two points by definition, now I need to establish that
+there must be at least two more.  Observe that it is required by the second
+axiom that there be a point $P$ not on some line.  Neither $A$ nor $B$ can
+satisfy this condition, since both of them are on both lines, thus there
+must be at least one more point for both $\ell_1$ and $\ell_2$ (since these
+are the only lines warranted to exist by the first axiom).  Thus we have
+that there will be at least four points in this system.
+\subsection{Problem 2}
+\label{sec-1-2}
+Given the system of axioms which defins ``point'', ``line'', an ``on''
+relation and axioms:
+\begin{enumerate}
+\item There are at least two lines.
+\item There are exactly seven points.
+\item There are exactly three points on each line.
+\item For every two lines there's exactly one point that is on both of them.
+\begin{itemize}
+\item Prove that the system is consistent.
+\item Prove that the system is independent.
+\item Prove or disporve the statement: the system is categorical.
+\end{itemize}
+\end{enumerate}
+Given following axioms:
+\begin{enumerate}
+\item Every two points are on one and only line.
+\item Every three points are on one and only line.
+\end{enumerate}
+
+For axioms 5 and 6, prove or disprove: after appending either one of them
+to the original system, the system will remain consistent.
+
+\subsubsection{Answer 5}
+\label{sec-1-2-1}
+To prove consistency I will need to show a model for the system.  I will
+start by naming the points: $A,B,C,D,E,F,G$.  Suppose now, I built four
+three lines: $\ell_1=\{A,B,C\}$, $\ell_2=\{A,D,E\}$, $\ell_3=\{B,D,F\}$,
+$\ell_4=\{C,D,G\}$.
+
+First axiom holds since there are at least two lines (four actually).
+Second axiom holds since there are exactly seven points.  Third axiom
+holds since ther are exactly three points on each line.  Fourth axiom
+holds since there is exactly one point where each two lines intersect.
+Let's list them in a table:
+
+\begin{center}
+\begin{tabular}{l|llll}
+ & $\ell_1$ & $\ell_2$ & $\ell_3$ & $\ell_4$\\
+\hline
+$\ell_1$ &  &  &  & \\
+$\ell_2$ & $A$ &  &  & \\
+$\ell_3$ & $B$ & $D$ &  & \\
+$\ell_4$ & $C$ & $D$ & $D$ & \\
+\end{tabular}
+\end{center}
+
+\emph{(note that we only need to fill half the table, since it's symmetrical)}
+\subsubsection{Answer 6}
+\label{sec-1-2-2}
+To prove independence, I need to show a model that is inconsisten with
+all modles, but is consistent with the system lacking either one of the
+axioms.  First axiom warrants us the existence of lines, if it wasn't
+for the first axiom, the system could have no lines, and all other
+axioms would hold vacuously.  If we haven't been given that thre must
+be exactly seven points, we could construct a system which would have
+fewer points but satisfy all other conditions, for example:
+$\ell_1=\{A,B,C\},\ell_2=\{C,D,E\}$, which has at least two lines,
+exactly three points on each line and $C$ is the only line where $\ell_1$
+and $\ell_2$ intersect.  If we remove the fourth axiom, then we could
+build a model, where some lines don't intersect, for example:
+$\ell_1=\{A,B,C\},\ell_2=\{C,D,E\},\ell_3=\{E,F,G\}$.
+
+Since I've tried to remove every axiom and was able to build a model
+inconsistent with the removed axiom, but consistent with the rest, the
+system must be independent.
+\subsubsection{Answer 7}
+\label{sec-1-2-3}
+The system is categorical.  It has exactly seven points and all
+assignments of lines to these points are equivalent up to isomorphism.
+To prove this, suppose this was not the case.  Suppose there was
+an assignment of lines to points such that would be different from
+the one modeled in \ref{sec-1-2-1}.  First, observe that this wouldn't have
+been possible to achieve with three lines, as this would require that
+provided there are three points on each line, either two of three lines
+don't intersect, or, there would be one spare point left.  To see
+why this is true, let's count the elements of three sets where each
+contains exactly three elements such that it shares one of the elements
+with the other set.  Since there are three of them, there must be two
+elements in each set that are shared with the other sets.  I.e. each
+set contains one element it doesn't share with anyone, and two elements
+it shares with each other set.  This, in turn gives us 3 non-shared
+elements, and three elements shared between pairs of sets.  Which is
+one element shy of the requirement.
+
+Observe also that this system cannot be modeled by five or more lines
+because five lines would require that lines with exactly three points
+intersect with every other four lines in exactly one point, which is
+not possible (by pigeonhole principle, some two lines would have to
+intersect in two points, or there would have to be more points in each
+line).
+
+With this out of the way, we can now limit our proof to only proving
+that any assignment of four lines to seven points with initial constraints
+will be isomorphic.  Obseve that without loss of generality, we could
+select any three points and draw a line through them.  Let these be
+$A$, $B$ and $C$ for the ease of reference.  We are now left with
+four points, we need to draw a line through each pair of these four
+points such that the third point would be then either $A$, $B$ or $C$.
+Combinations of two from four give us three, all of them equivalent
+choices.  These are also the only choices that we can make, since if
+we chose either three or one points from the $D,E,F,G$, then we will
+fail to satisfy either the requirement that all lines have a commont
+point or that that any two lines intersect in only one point.
+This gives us an assignment of lines to points unique up to renaming,
+which is another way of saying that the model is unique up to isomorphism.
+\subsubsection{Answer 8}
+\label{sec-1-2-4}
+Every two points are on one and only line---this follows from the system
+in question.  Since we proved earlier that the system is categorical,
+we can use its model to prove simply by counting that every line has
+a combination of two unique points.
+\subsubsection{Answer 9}
+\label{sec-1-2-5}
+If, however, we claimed that every three points are on one and only
+line, the system would've become inconsistent.  One way to see that
+is to, again, simply by looking at the model (and we are allowed to
+do so, since we know it's the only possible model).  Another way
+is to simply count the combinations of three out of seven without
+repetition.  This gives us that if this axiom was consistent with
+the system, there would have to be 35 lines, but we know ther to be
+only 4.  Thus it would be a contradiction.
+\subsection{Problem 3}
+\label{sec-1-3}
+Given the axioms of group which define ``element'' and ``binary operation''.
+\begin{enumerate}
+\item Prove that the system is consistent.
+\item Prove that the second axiom is not derivable from the rest.
+\item Prove that the fourth axiom is not derivable from the rest.
+\item With added fifth axiom: ``there are exactly four elements'', 
+let $G$ be a set of functions $f,g,h,k : \{1,2,3,4\}\to\{1,2,3,4\}$
+defined as: $f$ is the identity function, $g(4)=4, g(3)=3, g(2)=1, g(1)=2$,
+$h(4)=3, h(3)=4, h(2)=1, h(1)=2$, $k=g \circ h$.
+Prove that $G$ with function composition operation models the system
+$(1,2,3,4,5)$.
+\item Prove that $(1,2,3,4,5)$ is not categorical.
+\end{enumerate}
+
+\subsubsection{Answer 10}
+\label{sec-1-3-1}
+To prove consistency I need to show a model of the system.  Let's
+recal the axioms:
+\begin{description}
+\item[{Closure}] the result of application of group operation to any two
+elements of the group is an element of the group.
+\item[{Associativity}] the order of application of group operation doesn't
+matter.
+\item[{Identity element}] there exists an element in the group, which,
+under group operation with any element of the group will give that
+same element.
+\item[{Inverse}] for every group element there exists an element in the
+group which under group operation produces the identity element of
+that group.
+\end{description}
+
+Integers under addition form a group, which is a model of any group,
+thus the system is consistent.
+\subsubsection{Answer 11}
+\label{sec-1-3-2}
+I don't know which one is second, but I'll assume \textbf{associativity}.
+An example of a set with operation, which is closed, has identity element
+and has inverses one could consider matrix multiplication on the set
+of invertible matrices.  These will have inverses by construction,
+multiplication of any two invertible matrices is still an invertible matrix,
+the identity matrix is certainly the member of the set of all invertible
+matrices, but, in general, multiplication will not be associative.
+Thus, second axiom is not derivable from the rest.
+\subsubsection{Answer 12}
+\label{sec-1-3-3}
+Again, I'll assume that the fourth axiom is the \textbf{inverse element}.
+An example of an operation on a set which has closure, associativity,
+identity element but not inverses is the set of natural numbers under
+multiplication.  1 is the identity element, associativy holds by the
+definition of multiplication and similarly for closure, however, in
+general, natural numbers don't have inverses under multiplication in
+the set of natural numbers.  (Only identity element has an inverse---itself).
+\subsubsection{Answer 13}
+\label{sec-1-3-4}
+Let's prove $G$ is a group, since the fifth axiom holds trivially by
+construction.
+
+$G$ has identity element, again, by definition, it is $f$.  So,
+the \textbf{identity} axiom holds. Now, observe that under function composition
+$g \circ g = I$, $f \circ f = I$, $h \circ h = I$, $k \circ k = I$.
+This warrants us that every element has an \textbf{inverse} (itself).  By looking
+through all results of all functions, it is easy to see that none of the
+given functions never produces anything other than 1, 2, 3 or 4, so $G$
+is \textbf{closed} under function composition.
+
+In order to prove \textbf{associativity} I will have to build the operation
+table.  Given the table is symmetrical along its diagonal, the operation
+would have to be associative:
+
+\begin{center}
+\begin{tabular}{l|llll}
+ & $f$ & $g$ & $h$ & $k$\\
+\hline
+$f$ & $(1,2,3,4)$ & $(2,1,3,4)$ & $(1,2,4,3)$ & $(2,1,4,3)$\\
+$g$ & $(2,1,3,4)$ & $(1,2,3,4)$ & $(2,1,4,3)$ & $(1,2,4,3)$\\
+$h$ & $(2,1,3,4)$ & $(2,1,4,3)$ & $(1,2,3,4)$ & $(2,1,3,4)$\\
+$k$ & $(2,1,4,3)$ & $(1,2,4,3)$ & $(2,1,3,4)$ & $(1,2,3,4)$\\
+\end{tabular}
+\end{center}
+
+\emph{(Note that the results are given as tuples, where order matters)}
+
+Since the table is symmetrical along its diagonal, the operation is associative.
+This completes the proof.
+\subsection{Problem 4}
+\label{sec-1-4}
+Given system of axioms which defines ``point'', ``line'' and ``on''
+relationship where:
+\begin{enumerate}
+\item There are exactly four points.
+\item Every two points belong to the one and only line.
+\item For every line $\ell$ and every point $P$, which is not on $\ell$
+there exists the only line such that $P$ is on it and this (other)
+line has no points in common with $\ell$.
+
+\item Prove that the system is consistent.
+\item Prove that the system isn't categorical.
+\item Prove that the system is not complete, in other words, that there
+exists a theorem, which, when added to the system doesn't make it
+contradictory.
+\item Prove that this system entails ``there doesn't exist a line which
+has exactly three points on it.''
+\end{enumerate}
+
+\subsubsection{Answer 14}
+\label{sec-1-4-1}
+To prove consistency, I will demonstrate the model for this system.
+One such model can be constructed from
+$\ell_1=\{A,B\},\ell_2=\{B,C\},\ell_3=\{C,D\},\ell_4=\{D,A\},\ell_5=\{A,C\}\ell_6=\{B,D\}$.
+
+(1) holds because there are exactly four points: $A,B,C$ and $D$.
+(2) holds because every two points belong to distinct lines.
+(3) holds because for $\ell_1$ there's $\ell_3$ which satisfies
+the condition for $C$ and $D$, which are not on $\ell_1$, and,
+symmetrically, for all lines other than $\ell_5$ and $\ell_6$.
+$\ell_6$ satisfies third axiom using $\ell_5$ and points $D$ and $B$,
+$\ell_5$ is symmetrical to $\ell_6$.
+\subsubsection{Answer 15}
+\label{sec-1-4-2}
+To prove that the system isn't categorical, I will build a model
+which also satisfies the three axioms, but is not isomorophic to
+the model given in \ref{sec-1-4-1}.  The model is very simple:
+$\ell=\{A,B,C,D\}$.
+
+(1) holds by construction.
+(2) holds since any two points are on $\ell$ (there are no other
+lines they can belong to).
+(3) holds vacuously since there are no points which are not on $\ell$,
+we are allowed to conclude that the condition is satisfied.
+\subsubsection{Ansswer 16}
+\label{sec-1-4-3}
+There could be plenty of axioms added to this system such that they
+will neither derive from the rest nor contradict the rest.  As
+seen in \ref{sec-1-4-2} I could add a requirement that there be only
+one line.  Since in the \ref{sec-1-4-1} I just demonstrated a model which
+is consistent with the original model, but is inconsistent with
+the new model, the added axiom is independentent of the first three.
+The argument for consistency was given in \ref{sec-1-4-2}.
+\subsubsection{Answer 17}
+\label{sec-1-4-4}
+In order to prove that the statement is not entailed by the system I
+will add this statement to the system, and will prove inconsistency.
+
+So, suppose there was line with exactly three points.  Without loss of
+generality, let's name these points $A$, $B$ and $C$.  The remaining
+point $D$ would, by the third axiom require that we be able to draw a line
+through it, which has no common points with $\ell$ ($\ell=\{A,B,C\}$).
+But we are also given that every two ponts must be on a line.  So, $D$
+must be on a line with some other point.  Since we are given that there
+are only four of them, we are left with just three choices, and all of
+them are on $\ell$.  Thus $D$ must be on $\ell$.  But, by assumption,
+$D$ is not on $\ell$.  This is a contradiction, hence system with
+the fourth axiom added is inconsistent, hence it does not entail it.
+% Emacs 25.0.50.1 (Org mode 8.2.2)
+\end{document}
